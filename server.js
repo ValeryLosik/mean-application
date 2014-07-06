@@ -32,8 +32,10 @@ app.use(stylus.middleware({
 }));
 
 app.use(express.static(__dirname + '/public'));
-
-mongoose.connect('mongodb://localhost/mean');
+if(env=='development')
+    mongoose.connect('mongodb://localhost/mean');
+else
+mongoose.connect('mongodb://v.losik:mean@ds037907.mongolab.com:37907/mean');
 var db = mongoose.connection;
 
 
