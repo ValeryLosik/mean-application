@@ -3,7 +3,6 @@ var express = require('express'),
     mongoose = require('mongoose');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-var bodyParser = require('body-parser');
 var winston = require('winston');
 
 
@@ -22,7 +21,6 @@ app.set('view engine', 'jade');
 
 //app.use(express.logger('dev'));
 // parse application/json
-app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json
 //middleware of stylus
