@@ -1,0 +1,21 @@
+.container
+    .jumbotron
+        h1 My Application
+        p Some text here
+
+    .row
+        //.col-md-6
+        //    div(ng-include="'/partials/main/left'")
+        //.col-md-6
+        //    div(ng-include="'/partials/main/right'")
+        div {{max}}
+        button(ng-click='count()')
+        table(class='table')
+            tbody
+                tr(ng-repeat="word in words")
+                    td {{word.id}}
+                    td {{word.word}}
+                    td
+                      input(value='{{word.spending}}',readonly)
+                      div( slider,ng-model='word.spending',slidermax='{{max+word.spending}}')
+
