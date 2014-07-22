@@ -1,4 +1,6 @@
-var auth = require('./auth');
+var auth = require('./auth'),
+    mongoose = require('mongoose'),
+    User = mongoose.model('User');
 
 module.exports = function (app) {
 
@@ -6,8 +8,19 @@ module.exports = function (app) {
         res.render('../../public/app/' + req.params[0]);
     });
     app.post('/login', auth.authenticate);
-
-    app.get('*', function (req, res) {
-        res.render('index');
+    app.post('/logout', function (req, res) {
+        req.logout();
+        res.end();
     });
+    app.get('/api/users', auth.requiresRole('admin'), function (req, res) {
+        User.find({}).exec(function (err, users) {
+            res.send(users);
+        });
+    });
+    app.get('*', function (req, res) {
+        res.render('index', {
+            bootstrappedUser: req.user
+        });
+    });
+
 }
